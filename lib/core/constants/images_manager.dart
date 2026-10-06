@@ -1,3 +1,3 @@
 class ImagesManager {
-  static const String onbImage="asset/onb/rafiki.png";
+  static const String onbImage="asset/images/rafiki.png";
 }
