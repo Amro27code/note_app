@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360.0, 800.0),
       minTextAdapt: true,
+      splitScreenMode: true,
       child: MaterialApp(
         theme: ThemeData(
-          appBarTheme: AppBarThemeData(backgroundColor: Colors.white),
+          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
           scaffoldBackgroundColor: Colors.white,
           fontFamily: FontFamilyManager.roboto,
         ),

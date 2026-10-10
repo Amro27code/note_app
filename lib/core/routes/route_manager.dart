@@ -8,6 +8,7 @@ import 'package:note_app/view/splash/splash_screen.dart';
 class RouteManager {
   static Route<dynamic>? onRouteGenerate(RouteSettings settings) {
     Widget body;
+
     switch (settings.name) {
       case RouteName.onbScreen:
         body = OnBoardingScreen();
@@ -16,12 +17,12 @@ class RouteManager {
 
       case RouteName.homeScreen:
         body = HomeScreen();
-        case RouteName.newNoteScreen:
+      case RouteName.newNoteScreen:
         body = NewNoteScreen();
       default:
         body = NoFoundScreen();
     }
-    return MaterialPageRoute(builder: (context) => body);
+    return MaterialPageRoute(builder: (context) => body, settings: settings);
   }
 
   // static Map<String, WidgetBuilder> routes = {

@@ -7,8 +7,9 @@ import 'floating_action_button_widget.dart';
 
 class AppBarNewNoteWidget extends StatelessWidget
     implements PreferredSizeWidget {
-  const AppBarNewNoteWidget({super.key, required this.onPressedSave});
+  const AppBarNewNoteWidget({super.key, required this.onPressedSave, required this.isEdit});
 final VoidCallback onPressedSave;
+final bool isEdit;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -21,7 +22,7 @@ final VoidCallback onPressedSave;
         ),
       ),
       actions: [
-        FloatingActionButtonWidget(onPressedSave:onPressedSave ,),
+        FloatingActionButtonWidget(onPressedSave:onPressedSave, isEdit: isEdit ,),
         // circleButtonWidget(
         //   onTap: () {},
         //   icon: CupertinoIcons.checkmark_alt_circle,

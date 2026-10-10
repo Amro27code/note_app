@@ -2,30 +2,31 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_app/model/note_model.dart';
 
 class HiveHelper<T> {
-  String boxName1 = "NotesBox";
+  String boxName;
 
-  Future<Box<T>> openBox() async {
-    Box<T> b = await Hive.openBox<T>("name");
-    return b;
+  Future<Box> openBox(String boxName) async {
+    return await Hive.openBox(boxName);
   }
 
-  void closeBox(Box<T> b) async {
+  HiveHelper(this.boxName);
+
+  void closeBox(Box b) async {
     await b.close();
   }
 
-  void addValue(NoteModel noteModel) async {
-    Box<T> b = await openBox();
+  Future<void> addValue({required T value, required String key}) async {
+    Box b = await openBox(boxName);
+    print(b.values);
     try {
-      if (T is Map) {
-        await b.put(noteModel.id, noteModel.toJson() as T);
-      }
+      await b.put(key, value);
     } finally {
       closeBox(b);
+      await b.close();
     }
   }
 
-  Future<bool> updateValue(NoteModel noteModel) async {
-    Box<T> b = await openBox();
+  Future<bool> updateValue({required NoteModel noteModel}) async {
+    Box b = await openBox(boxName);
     bool founded = false;
     try {
       if (b.containsKey(noteModel.id)) {
@@ -38,8 +39,8 @@ class HiveHelper<T> {
     return founded;
   }
 
-  void delete(int key) async {
-    Box<T> b = await openBox();
+  void delete({required int key}) async {
+    Box b = await openBox(boxName);
     try {
       if (b.containsKey(key)) {
         await b.delete(key);
@@ -49,16 +50,35 @@ class HiveHelper<T> {
     }
   }
 
-  Future<T?> getItem(int key) async {
-    Box<T> b = await openBox();
-    T? value;
+  Future<T?> getItem({required String key}) async {
+    Box b = await openBox(boxName);
     try {
-      if (b.containsKey(key)) {
-        value = b.get(key);
+      // if (b.containsKey(key)) {
+      print("------------------");
+
+      var value = b.get(key);
+      if (value == null) {
+        return null;
+      } else if (value is Map) {
+        return Map<String, dynamic>.from(value) as T;
       }
+      print("Value=>$value");
+      return value;
     } finally {
       closeBox(b);
     }
-    return value;
+  }
+
+  Future<List<NoteModel>> getAllData() async {
+    Box b = await openBox(boxName);
+    List value;
+    List<NoteModel> notes = [];
+    try {
+      value = b.values.toList();
+      notes = value.map((element) => NoteModel.fromJson(element)).toList();
+    } finally {
+      closeBox(b);
+    }
+    return notes;
   }
 }

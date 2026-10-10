@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/constants/color_manager.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
-  const FloatingActionButtonWidget({super.key, required this.onPressedSave});
+  const FloatingActionButtonWidget({super.key, required this.onPressedSave, required this.isEdit});
 final VoidCallback onPressedSave;
+  final bool isEdit;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +16,7 @@ final VoidCallback onPressedSave;
         onPressed: onPressedSave,
         backgroundColor: ColorManager.primary,
         foregroundColor: Colors.white,
-        child: Icon(CupertinoIcons.checkmark_alt_circle),
+        child: Icon(isEdit?CupertinoIcons.pencil:CupertinoIcons.checkmark_alt_circle),
       ),
     );
   }

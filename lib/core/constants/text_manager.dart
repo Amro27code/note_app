@@ -9,4 +9,7 @@ static const String errorTextBottomSheet="Should add title and desc";
 static const String toSave="to Save";
 static const String ok="OK";
 static const String delete="Delete";
+  static const String boxName1 = "NotesBox";
+  static const String idBox = "idBox";
+  static const String idKey = 'id';
 }

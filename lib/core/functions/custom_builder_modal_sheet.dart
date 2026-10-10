@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/constants/color_manager.dart';
-import '../../../core/constants/font_size_manager.dart';
-import '../../../core/constants/text_manager.dart';
-import '../../../core/functions/circle_button_widget.dart';
-import '../../../core/functions/height_spacing.dart';
-import '../../../core/functions/width_spacing.dart';
-import 'custom_ok_or_delete_button_widget.dart';
+import '../constants/color_manager.dart';
+import '../constants/font_size_manager.dart';
+import '../constants/text_manager.dart';
+import 'circle_button_widget.dart';
+import 'height_spacing.dart';
+import 'width_spacing.dart';
+import '../../view/new note/widget/custom_ok_or_delete_button_widget.dart';
 
 class CustomBuilderModalSheet extends StatelessWidget {
   const CustomBuilderModalSheet({

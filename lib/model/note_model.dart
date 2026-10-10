@@ -11,13 +11,29 @@ class NoteModel {
     required this.date,
     required this.isDone,
   });
-  Map<String,dynamic> toJson(){
+
+  factory NoteModel.fromJson(Map json) {
+    return NoteModel(
+      id: json['id'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      date: json['date'],
+      isDone: json['isDone'],
+    );
+  }
+
+  @override
+  String toString() {
+    return 'NoteModel{id: $id, isDone: $isDone, date: $date, title: $title, subtitle: $subtitle}';
+  }
+
+  Map<String, dynamic> toJson() {
     return {
-      'id':id,
-      'title':title,
-      'subtitle':subtitle,
-      'isDone':isDone,
-      'date':date
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'isDone': isDone,
+      'date': date,
     };
   }
 }

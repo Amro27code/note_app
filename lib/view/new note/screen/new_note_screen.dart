@@ -15,21 +15,34 @@ class NewNoteScreen extends StatefulWidget {
 
 class _NewNoteScreenState extends State<NewNoteScreen> {
   late NewNoteController _newNoteController;
-
+bool _isDataLoaded=false;
   @override
   void initState() {
     super.initState();
     _newNoteController = NewNoteController(context);
   }
 @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isDataLoaded) {
+      _newNoteController.getDataFromLastScreen();
+      _isDataLoaded=true;
+    }
+  }
+  @override
   void dispose() {
     super.dispose();
     _newNoteController.disposeController();
   }
+
   @override
   Widget build(BuildContext context) {
+    // _newNoteController.getDataFromLastScreen();
     return Scaffold(
-      appBar: AppBarNewNoteWidget(onPressedSave: _newNoteController.checkRequiredData),
+      appBar: AppBarNewNoteWidget(
+        onPressedSave: _newNoteController.checkRequiredData,
+        isEdit:_newNoteController.isEdit
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -71,7 +84,9 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: _controller,
       maxLines: isTitle ? 1 : null,
+      expands: !isTitle,
       cursorColor: Colors.black,
       style: TextStyle(
         color: Colors.black,

@@ -19,52 +19,59 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-
   late OnbController _onbController;
+
   @override
   void initState() {
     super.initState();
-    _onbController=OnbController(context);
+    _onbController = OnbController(context);
   }
+
   @override
   Widget build(BuildContext context) {
+    // FocusScope.of(
+    //   context,
+    // ).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
     return Scaffold(
-      body: SizedBox(
-        width: .infinity,
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            Image.asset(
-              ImagesManager.onbImage,
-              width: WidthManager.w282,
-              height: HeightManager.h231,
-              alignment: .center,
-            ),
-            heightSpacing(55),
-            Text(
-              TextManager.titleOnb,
-              textAlign: .center,
-              style: TextStyle(
-                fontFamily: FontFamilyManager.otamaEp,
-                fontSize: FontSizeManager.fs48,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: .infinity,
+          child: Column(
+            mainAxisAlignment: .center,
+            children: [
+              heightSpacing(100),
+              Image.asset(
+                ImagesManager.onbImage,
+                width: WidthManager.w282,
+                height: HeightManager.h231,
+                alignment: .center,
               ),
-            ),
-            heightSpacing(20),
-            Text(
-              TextManager.subtitleOnb,
-              textAlign: .center,
-              style: TextStyle(
-                color: ColorManager.kGrey,
-                fontSize: FontSizeManager.fs16,
+              heightSpacing(55),
+              Text(
+                TextManager.titleOnb,
+                textAlign: .center,
+                style: TextStyle(
+                  fontFamily: FontFamilyManager.otamaEp,
+                  fontSize: FontSizeManager.fs48,
+                ),
               ),
-            ),
-          ],
+              heightSpacing(20),
+              Text(
+                TextManager.subtitleOnb,
+                textAlign: .center,
+                style: TextStyle(
+                  color: ColorManager.kGrey,
+                  fontSize: FontSizeManager.fs16,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 50.0),
         child: circleButtonWidget(
-          onTap:_onbController.goToHomeScreen,
+          onTap: _onbController.goToHomeScreen,
           icon: Icons.arrow_forward_ios,
           iconSize: SizeManager.s23,
         ),
